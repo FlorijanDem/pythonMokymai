@@ -43,11 +43,17 @@ def process_command(command):
         x = input()
         if checker.exists(x) == True:
             print("Enter grade")
-            grade = int(input())
-            if inRange(grade) == True:    
-                data[x].append(grade)
-            else:
-                print("Wrong range")
+            grade = list(map(int, input().split(",")))
+            print(grade)
+            for i in grade:
+                if inRange(i):
+                    data[x].append(i)
+                else:
+                    print("Wrong range")
+            # if inRange(grade) == True:    
+            #     data[x].append(grade)
+            # else:
+            #     print("Wrong range")
         else:
             print("Student do not exists")
     
