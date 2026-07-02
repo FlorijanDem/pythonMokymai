@@ -1,10 +1,10 @@
-line = "Zen of Python, by Tim Peters"
+line = "Zen trea Python, by Tim Peters"
 
 x1 = line.split()
-print(x1[1][1])
+print(x1[1][-2])
 print(x1[2][0])
 print(x1[:1])
-print(x1[-1::]) 
+print(x1[-1]) 
 print(x1[::-1])
 
 for i in x1:
