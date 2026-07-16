@@ -31,19 +31,6 @@ class Item:
         self.item_type = item_type
         self.weight = weight
 
-    def add_item(self, item):
-        self.inventory.append(item)
-
-    def remove_item(self, item_name):
-        self.inventory.remove(item_name)
-
-    def get_total_weight(self):
-        sum:float = 0
-        for i in self.weight:
-            sum = sum + self.weight
-        return sum
-    
-
 class Player:
     def __init__(self, name, level):
         self.name = name
@@ -54,7 +41,36 @@ class Player:
         self.level += 1
 
     def __str__(self):
-        result = f"Name:{self.name} Level:{self.level} Inventory:{self.inventory}"
+        items_in_inventory = []
+        for i in self.inventory:
+            items_in_inventory.append({i.name, i.item_type, i.weight})
+        result = f"Name:{self.name} Level:{self.level} Inventory:{items_in_inventory}"
         return result
     
+    def add_item(self, item):
+        if self.get_total_weight() + item.weight > 20:
+            print("Cannot hadle it")
+        else:
+            self.inventory.append(item)
+
+    def remove_item(self, item_name):
+        self.inventory.remove(item_name)
+
+    def get_total_weight(self):
+        return sum(item.weight for item in self.inventory)
+
+sword = Item("Sword", 1, 6.2)
+bow = Item("Bow", 1, 2.3)
+sheld = Item("Sheld", 2, 11)
+rock = Item("Rock", 3, 25)
     
+player = Player("Jonas", 1)
+player.add_item(sword)
+player.add_item(bow)
+player.add_item(sheld)
+# player.add_item(rock)
+
+player.remove_item(bow)
+player.level_up()
+print(player)
+print(f'Weight:{player.get_total_weight()}')
